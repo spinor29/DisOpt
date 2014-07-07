@@ -1,5 +1,9 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
+
+# Vehicle routing problem
+# Given a list of locations N = 0...n-1, location 0 is the warehouse location where all of the vehicles start and end their routes. The remaining locations are customers. Each location is characterized by a demand d_i, and coordinates (x_i, y_i). The fleet of vehicles V = 0...v-1 is fixed and each vehicle has a limited capacity c. Find a route for each vehicle so that all of the customers are served by exactly one vehicle and the travel distance of the vehicles is minimized.
+
+# My solution is using the simulated annealing algorithm to find the optimal route.
 
 import math
 from collections import namedtuple
@@ -390,23 +394,16 @@ def solve_it(input_data):
         capacity_remaining = vehicle_capacity
         cust_on_vehi = []
         for i in templist:
-        #capacity_remaining = vehicle_capacity
-            #print "capacity_remaining = ", capacity_remaining, vehicle_capacity
             if capacity_remaining >= customers[i].demand:
                 cust_on_vehi.append(i)
                 capacity_remaining -= customers[i].demand
             #else:
         if len(cust_on_vehi) > 0:
             vehicle_tours.append(cust_on_vehi)
-                #capacity_remaining = vehicle_capacity
-                #cust_on_vehi = [ i ]
-                #capacity_remaining -= customers[i].demand
+            
         for i in range(len(cust_on_vehi)):
             templist.remove(cust_on_vehi[i])
-        #print templist
     
-    #if len(vehicle_tours) > vehicle_count:
-    #    print "Error! vehicle used more than available vehicles!"
     if templist != []:
         print "Error! Some customers were not on a vehicle route!"
         return 0
@@ -442,7 +439,7 @@ def solve_it(input_data):
                 if (i % 20000 == 0):
                     if abs(temp - obj) > 1.e-8:
                         converge = False
-        #        print "rand_move called ", t, obj
+                        
                 if obj_min > obj:
                     obj_min = obj
                     solution_min = copy.deepcopy(vehicle_tours)
