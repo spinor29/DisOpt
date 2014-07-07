@@ -1,0 +1,5 @@
+set limits time 300
+read tmp.pip
+optimize
+write solution tmp.sol 
+quit
