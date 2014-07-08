@@ -39,33 +39,48 @@ from subprocess import Popen, PIPE
 
 import numpy
 
-def solve_it(input_data):
-    # Parse the input data (line 2 to line N are facility data, line n+1 to line M are customer data):
-    # N M
+def read_facility(facility_data):
+    # Parse the facility data :
+    # N
     # s_0 C_0 x_0 y_0
     # s_1 C_1 x_1 y_1
     # ...
     # s_N-1 C_N-1 x_N-1 y_N-1
+    
+    lines = facility_data.split('\n')
+
+    facility_count = int(lines[0])
+    
+    facilities = []
+    for i in range(1, facility_count+1):
+        parts = lines[i].split()
+        assert len(parts) == 4
+        facilities.append(Facility(i-1, float(parts[0]), int(parts[1]), Point(float(parts[2]), float(parts[3])) ))
+    return facility_count, facilities
+
+def read_customer(customer_data):
+    # Parse the customer data:
+    # M
     # D_N x_N y_N
     # D_N+1 x_N+1 y_N+1
     # ...
     # D_N+M-1 x_N+M-1 y_N+M-1
     
-    lines = input_data.split('\n')
+    lines = customer_data.split('\n')
 
-    parts = lines[0].split()
-    facility_count = int(parts[0])
-    customer_count = int(parts[1])
+    customer_count = int(lines[0])
     
-    facilities = []
-    for i in range(1, facility_count+1):
-        parts = lines[i].split()
-        facilities.append(Facility(i-1, float(parts[0]), int(parts[1]), Point(float(parts[2]), float(parts[3])) ))
-
     customers = []
-    for i in range(facility_count+1, facility_count+1+customer_count):
+    for i in range(1, customer_count+1):
         parts = lines[i].split()
-        customers.append(Customer(i-1-facility_count, int(parts[0]), Point(float(parts[1]), float(parts[2]))))
+        assert len(parts) == 3
+        customers.append(Customer(i-1, int(parts[0]), Point(float(parts[1]), float(parts[2]))))
+    return customer_count, customers        
+
+def solve_it(facility_data, customer_data):
+    # Read data
+    facility_count, facilities = read_facility(facility_data)
+    customer_count, customers = read_customer(customer_data)
 
     # Limit customers to nearest facilities
     n_near = 20 
@@ -200,12 +215,16 @@ import sys
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
-        file_location = sys.argv[1].strip()
-        input_data_file = open(file_location, 'r')
-        input_data = ''.join(input_data_file.readlines())
-        input_data_file.close()
-        print 'Solving:', file_location
-        solve_it(input_data)
+        facility_filename = sys.argv[1].strip()
+        customer_filename = sys.argv[2].strip()
+        facility_data_file = open(facility_filename, 'r')
+        customer_data_file = open(customer_filename, 'r')
+        facility_data = ''.join(facility_data_file.readlines())
+        customer_data = ''.join(customer_data_file.readlines())
+        facility_data_file.close()
+        customer_data_file.close()
+        print 'Solving...'
+        solve_it(facility_data, customer_data)
     else:
-        print 'This test requires an input file. (For example: python solver.py fl_100.txt)'
+        print 'This test requires two input files. (For example: python solver.py fac_data.txt cus_data.txt)'
 
