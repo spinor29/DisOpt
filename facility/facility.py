@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # Facility location problem
-# Given N facilities to choose from and M customers to be served, each facility f has a setup cost s_f and a capicity cap_f, and each customer has a demand d_c. All customers must be served by exactly 1 facility. The cost to deliver goods to a particular customer is the distance between two locations. Find which facilities serve which customers so that the total cost is minimized.
+# Given N facilities and M customers, each facility f has a setup cost s_f and a capicity C_f, and each customer has a demand D_c. All customers must be served by exactly 1 facility. The cost to deliver goods to a particular customer from a facility is the distance between their locations. Find which facilities serve which customers so that the total cost is minimized.
 
 # I use SCIP MIP solver (http://scip.zib.de) to find the solution
 
@@ -40,16 +40,16 @@ from subprocess import Popen, PIPE
 import numpy
 
 def solve_it(input_data):
-    # Parse the input data (line 2 to line N are facility, line n+1 to line M are customer data):
+    # Parse the input data (line 2 to line N are facility data, line n+1 to line M are customer data):
     # N M
-    # s_0 cap_0 x_0 y_0
-    # s_1 cap_1 x_1 y_1
+    # s_0 C_0 x_0 y_0
+    # s_1 C_1 x_1 y_1
     # ...
-    # s_N-1 cap_N-1 x_N-1 y_N-1
-    # d_N x_N y_N
-    # d_N+1 x_N+1 y_N+1
+    # s_N-1 C_N-1 x_N-1 y_N-1
+    # D_N x_N y_N
+    # D_N+1 x_N+1 y_N+1
     # ...
-    # d_N+M-1 x_N+M-1 y_N+M-1
+    # D_N+M-1 x_N+M-1 y_N+M-1
     
     lines = input_data.split('\n')
 
