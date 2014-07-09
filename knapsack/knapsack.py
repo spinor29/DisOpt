@@ -92,26 +92,8 @@ def solve_it(input_data):
 
     sorted(items, key = lambda x: x.ratio) # Sort items by ratio of value/weight
     
-    ## Use shellsort to sort items by value/weight
-    #n = len(items)
-    #h = 1;
-    #while h < n/3:
-    #    h = 3 * h + 1
-    
-    #while h >= 1:
-    #    for i in range(h, n):
-    #        j = i
-    #        while ((j >= h) & ((float(items[j].value)/items[j].weight) > (float(items[j-h].value)/items[j-h].weight))):
-    #            temp = items[j-h]
-    #            items[j-h] = items[j]
-    #            items[j] = temp
-    #            j = j - h
 
-    #    h = int(h/3)
-
-    
     # Use branch and bound algorithm with linear relaxation
-
     value = 0
     weight = 0
     taken = [0]*len(items)
@@ -134,10 +116,6 @@ def solve_it(input_data):
     print chosen
     print "Maximum value: ", value
     
-    # Prepare the solution in the specified output format
-    #output_data = str(value) + ' ' + str(0) + '\n'
-    #output_data += ' '.join(map(str, taken))
-    #return output_data
     return
 
 import sys
@@ -150,7 +128,6 @@ if __name__ == '__main__':
         input_data = ''.join(input_data_file.readlines())
         input_data_file.close()
         solve_it(input_data)
-        #print solve_it(input_data)
     else:
         print 'This test requires an input file. (For example: python knapsack.py ks.txt)'
 
