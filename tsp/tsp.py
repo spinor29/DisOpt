@@ -150,11 +150,6 @@ def solve_it(input_data):
     print "Shortest route: ", ' '.join(map(str, solution_min))
     print "Total distance: ", obj_min
     
-    # prepare the solution in the specified output format
-    #output_data = str(obj_min) + ' ' + str(0) + '\n'
-    #output_data += ' '.join(map(str, solution_min))
-
-    #return output_data
     return
 
 import sys
@@ -166,7 +161,6 @@ if __name__ == '__main__':
         input_data = ''.join(input_data_file.readlines())
         input_data_file.close()
         solve_it(input_data)
-        #print solve_it(input_data)
     else:
         print 'This test requires an input file (For example: python solver.py tsp_50.txt).'
 
