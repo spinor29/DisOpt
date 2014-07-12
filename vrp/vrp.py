@@ -1,21 +1,32 @@
 #!/usr/bin/python
 
 # Vehicle routing problem
-# Given a list of locations N = 0...n-1, location 0 is the warehouse location where all of the vehicles start and end their routes. The remaining locations are customers. Each location is characterized by a demand d_i, and coordinates (x_i, y_i). The fleet of vehicles V = 0...v-1 is fixed and each vehicle has a limited capacity c. Find a route for each vehicle so that all of the customers are served by exactly one vehicle and the travel distance of the vehicles is minimized.
+# Given a list of locations N = 0...n-1, location 0 is the warehouse location
+# where all of the vehicles start and end their routes. The remaining locations
+# are customers. Each location is characterized by a demand d_i, and
+# coordinates (x_i, y_i). The fleet of vehicles V = 0...v-1 is fixed and each
+# vehicle has a limited capacity c. Find a route for each vehicle so that all
+# of the customers are served by exactly one vehicle and the travel distance of
+# the vehicles is minimized.
 
 # Formulation:
 # Minimize:
-# \sum_{j = 0...v-1} ( \sum_{e in E_j} dist_e * z_e )   # E_j is a set of edges  formed by warehouse and those customers served by vehicle j
+# \sum_{j = 0...v-1} ( \sum_{e in E_j} dist_e * z_e )   # E_j is a set of edges
+#  formed by warehouse and those customers served by vehicle j
 # Subject to:
 # (\sum_(i = 1...n-1) d_j h_i,j) <= c_j for j in 0...v-1  # Capacity constraint
-# (\sum_(j = 0...v-1) h_i,j) = 1 for i in 1...n-1  # each customer is served by exactly one vehicle
+# (\sum_(j = 0...v-1) h_i,j) = 1 for i in 1...n-1  # each customer is served by
+                                                   # exactly one vehicle
 # h_i,j = {0, 1}  # i: customer index, j: vehicle index
 # z_\delta(i = 0) <= 2 * v # number of edges that have end point warehouse 0
 # z_\delta(i) = 2 for i != 0 # number of edges that have end point customer i
-# z_\delta(S) >= 2 for S in V  # number of edges that have exactly one end point in S and one end point in V-S. This is the subtour elimination constraint.
+# z_\delta(S) >= 2 for S in V  # number of edges that have exactly one end
+#     point in S and one end point in V-S. This is the subtour elimination
+#     constraint.
 # z_e = {0, 1}, for e in E_j
 
-# The vehicle routing problem is essentially a combination of multi-knapsacks problem and traveling salesman problem.
+# The vehicle routing problem is essentially a combination of multi-knapsacks
+# problem and traveling salesman problem.
 
 # Here I use the simulated annealing algorithm to find the optimal routes.
 

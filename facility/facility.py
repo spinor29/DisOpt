@@ -1,7 +1,13 @@
 #!/usr/bin/python
 
 # Facility location problem
-# Given N facilities and M customers, each facility f has a setup cost s_f and a capicity C_f, and each customer has a demand D_c. All customers must be served by exactly 1 facility. The cost to deliver goods to a particular customer from a facility is the distance between their locations. Find which facilities serve which customers so that the total cost is minimized.
+# Given N facilities and M customers, each facility f has a setup cost s_f and
+# a capicity C_f, and each customer has a demand D_c. All customers must be
+# served by exactly 1 facility. The cost to deliver goods to a particular
+# customer from a facility is the distance between their locations.
+# 
+# Find which facilities serve which customers so that the total cost is
+# minimized.
 
 # I use SCIP MIP solver (http://scip.zib.de) to find the solution
 
