@@ -1,5 +1,5 @@
 ## Introduction ##
-This depo contains code I wrote for solving several NP complete problems using algorithms that I learned from Pascal Van Hentenryck's discrete optimization course.
+This repository contains code I wrote for solving several NP complete problems using algorithms that I learned from Pascal Van Hentenryck's discrete optimization course.
 
 ### The problems (and algorithms used) include: ###
 Knapsack problem (depth-first search, branch and bound),
