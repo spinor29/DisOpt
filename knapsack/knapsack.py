@@ -90,7 +90,7 @@ def solve_it(input_data):
         parts = line.split() # v_i, w_i
         items.append(Item(i-1, int(parts[0]), int(parts[1]), float(parts[0])/float(parts[1])))
 
-    sorted(items, key = lambda x: x.ratio) # Sort items by ratio of value/weight
+    items = sorted(items, key = lambda x: x.ratio, reverse=True) # Sort items by ratio of value/weight
     
 
     # Use branch and bound algorithm with linear relaxation
